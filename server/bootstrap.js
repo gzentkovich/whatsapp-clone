@@ -73,7 +73,7 @@ Meteor.startup(function() {
       }
   ];
 
-  chats.forEach((chats) => {
+  chats.forEach((chat) => {
     const message = Messages.findOne({ chatId: { $exists: false } });
     chat.lastMessage = message;
     const chatId = Chats.insert(chat);
