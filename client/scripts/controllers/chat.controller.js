@@ -1,4 +1,5 @@
 import Ionic from 'ionic-scripts';
+import { _ } from 'meteor/underscore';
 import { Meteor } from 'meteor/meteor';
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Chats, Messages } from '../../../lib/collections';
@@ -22,6 +23,16 @@ export default class ChatCtrl extends Controller {
   }
 
   sendMessage() {
+    if (_.isEmpty(this.message)) return;
+
+    // use callMethod() to call it on the server side
+    this.callMethod('newMessage', {
+      text: this.message,
+      type: 'text',
+      chatId: this.chatId
+    });
+
+    delete this.message;
   }
 
   inputUp () {
